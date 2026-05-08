@@ -1,25 +1,18 @@
 /* ============================================================================
    Solar Mason Repository Dashboard — Service Worker
    Deploys to: https://repo.nepa-pro.com/
-   ----------------------------------------------------------------------------
-   Caching strategy:
-     - SHELL  (HTML, icons, OG image):   network-first → cache fallback
-     - GITHUB API:                       stale-while-revalidate (instant + fresh)
-     - GOOGLE FONTS CSS:                 stale-while-revalidate
-     - GOOGLE FONTS WOFF2:               cache-first (immutable)
-   Bumping CACHE_VERSION purges all old caches on next activate.
    ============================================================================ */
 
-const CACHE_VERSION = 'v5';
+const CACHE_VERSION = 'v6';
 const SHELL_CACHE   = `solarmason-shell-${CACHE_VERSION}`;
 const API_CACHE     = `solarmason-api-${CACHE_VERSION}`;
 const FONT_CACHE    = `solarmason-fonts-${CACHE_VERSION}`;
 const ALL_CACHES    = [SHELL_CACHE, API_CACHE, FONT_CACHE];
 
-/* Files we want available offline. Relative paths so it works on any host. */
 const SHELL_FILES = [
   './',
   './index.html',
+  './manifest.webmanifest',
   './favicon.ico',
   './favicon-32.png',
   './icon-180.png',
@@ -27,7 +20,6 @@ const SHELL_FILES = [
   './icon-512.png',
   './icon-maskable-512.png',
   './og-image.png',
-  './manifest.webmanifest',
 ];
 
 self.addEventListener('install', (event) => {
@@ -54,7 +46,6 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
-
   let url;
   try { url = new URL(req.url); } catch { return; }
 
@@ -100,9 +91,7 @@ async function cacheFirst(request, cacheName) {
       cache.put(request, response.clone()).catch(() => {});
     }
     return response;
-  } catch (err) {
-    throw err;
-  }
+  } catch (err) { throw err; }
 }
 
 async function networkFirstWithCacheFallback(request, cacheName) {
@@ -117,8 +106,7 @@ async function networkFirstWithCacheFallback(request, cacheName) {
     const cached = await cache.match(request);
     if (cached) return cached;
     if (request.mode === 'navigate') {
-      const fallback = await cache.match('./index.html')
-                    || await cache.match('./');
+      const fallback = await cache.match('./index.html') || await cache.match('./');
       if (fallback) return fallback;
     }
     throw err;
@@ -126,7 +114,5 @@ async function networkFirstWithCacheFallback(request, cacheName) {
 }
 
 self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
+  if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
