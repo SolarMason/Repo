@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<title>Solar Mason — Repositories</title>
+
+<!-- Canonical URL for the live deployment -->
+<link rel="canonical" href="https://repo.nepa-pro.com/">
+
+<meta name="description" content="Live dashboard tracking all Solar Mason / NEPA-PRO public repositories on GitHub. Auto-updating every 5 minutes.">
+
+<!-- Theme color (PWA + browser chrome) -->
+<meta name="theme-color" content="#ff6b1f" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+
+<!-- iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Solar Mason">
+<meta name="application-name" content="Solar Mason">
+<meta name="format-detection" content="telephone=no">
+
+<!-- Branded icons (real PNG files; iOS, Android, browsers all use these) -->
+<link rel="apple-touch-icon" sizes="180x180" href="./icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="shortcut icon" href="./favicon.ico">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://repo.nepa-pro.com/">
+<meta property="og:site_name" content="Solar Mason">
+<meta property="og:title" content="Solar Mason — Repository Dashboard">
+<meta property="og:description" content="Live dashboard tracking all Solar Mason public repositories. Auto-updating every 5 minutes.">
+<meta property="og:image" content="https://repo.nepa-pro.com/og-image.png">
+<meta property="og:image:secure_url" content="https://repo.nepa-pro.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Solar Mason Repository Dashboard">
+<meta property="og:image:type" content="image/png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://repo.nepa-pro.com/">
+<meta name="twitter:title" content="Solar Mason — Repository Dashboard">
+<meta name="twitter:description" content="Live dashboard tracking all Solar Mason public repositories. Auto-updating every 5 minutes.">
+<meta name="twitter:image" content="https://repo.nepa-pro.com/og-image.png">
+<meta name="twitter:image:alt" content="Solar Mason Repository Dashboard">
+
+<!-- Web App Manifest (real file, not blob) -->
+<link rel="manifest" href="./manifest.webmanifest">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.github.com" crossorigin>
+<link rel="dns-prefetch" href="https://api.github.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg-wallpaper-1: #5e76b5;
+    --bg-wallpaper-2: #8a6db1;
+    --bg-wallpaper-3: #c08aa8;
+    --bg-wallpaper-4: #e8a87c;
+    --window-bg: rgba(246, 246, 248, 0.72);
+    --window-border: rgba(255, 255, 255, 0.55);
+    --window-shadow: 0 30px 80px rgba(0, 0, 0, 0.35), 0 0 0 0.5px rgba(0,0,0,0.18);
+    --sidebar-bg: rgba(232, 232, 237, 0.55);
+    --sidebar-item-hover: rgba(0, 0, 0, 0.05);
+    --sidebar-item-active: rgba(0, 122, 255, 0.92);
+    --content-bg: rgba(255, 255, 255, 0.55);
+    --card-bg: rgba(255, 255, 255, 0.78);
+    --card-border: rgba(0, 0, 0, 0.07);
+    --card-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.06);
+    --card-shadow-hover: 0 2px 4px rgba(0,0,0,0.06), 0 14px 28px rgba(0,0,0,0.12);
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-tertiary: #8e8e93;
+    --accent: #007aff;
+    --accent-soft: rgba(0, 122, 255, 0.12);
+    --orange: #ff9f0a;
+    --red: #ff3b30;
+    --green: #30d158;
+    --traffic-red: #ff5f57;
+    --traffic-yellow: #febc2e;
+    --traffic-green: #28c840;
+    --separator: rgba(0, 0, 0, 0.08);
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --window-bg: rgba(30, 30, 32, 0.78);
+      --window-border: rgba(255, 255, 255, 0.08);
+      --sidebar-bg: rgba(40, 40, 43, 0.55);
+      --sidebar-item-hover: rgba(255, 255, 255, 0.06);
+      --content-bg: rgba(28, 28, 30, 0.55);
+      --card-bg: rgba(44, 44, 46, 0.72);
+      --card-border: rgba(255, 255, 255, 0.07);
+      --card-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 6px 16px rgba(0,0,0,0.35);
+      --card-shadow-hover: 0 2px 4px rgba(0,0,0,0.5), 0 14px 28px rgba(0,0,0,0.5);
+      --text-primary: #f5f5f7;
+      --text-secondary: #98989d;
+      --text-tertiary: #6e6e73;
+      --separator: rgba(255, 255, 255, 0.08);
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    height: 100%; width: 100%; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    color: var(--text-primary); font-size: 13px;
+    overscroll-behavior: none;
+  }
+  body {
+    background:
+      radial-gradient(1200px 800px at 15% 20%, var(--bg-wallpaper-1) 0%, transparent 60%),
+      radial-gradient(1000px 700px at 85% 30%, var(--bg-wallpaper-2) 0%, transparent 55%),
+      radial-gradient(900px 700px at 70% 90%, var(--bg-wallpaper-3) 0%, transparent 55%),
+      radial-gradient(800px 600px at 10% 90%, var(--bg-wallpaper-4) 0%, transparent 55%),
+      linear-gradient(135deg, #4a5e9a 0%, #6f4e8e 50%, #b87a8e 100%);
+    background-attachment: fixed;
+    padding: 20px;
+    display: flex; align-items: stretch; justify-content: stretch;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.04; pointer-events: none; z-index: 0;
+  }
+  .window {
+    width: 100%; height: 100%;
+    border-radius: 12px;
+    background: var(--window-bg);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 0.5px solid var(--window-border);
+    box-shadow: var(--window-shadow);
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: 38px auto 1fr;
+    position: relative; z-index: 1;
+  }
+  .titlebar {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    align-items: center;
+    border-bottom: 0.5px solid var(--separator);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0));
+    user-select: none; -webkit-user-select: none;
+  }
+  .traffic-lights { display: flex; gap: 8px; padding-left: 13px; }
+  .light { width: 12px; height: 12px; border-radius: 50%; border: 0.5px solid rgba(0,0,0,0.12); }
+  .light.red    { background: var(--traffic-red); }
+  .light.yellow { background: var(--traffic-yellow); }
+  .light.green  { background: var(--traffic-green); }
+  .titlebar-center { text-align: center; font-size: 13px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.01em; }
+  .menu-btn {
+    display: none; width: 44px; height: 44px;
+    background: transparent; border: none; color: var(--accent);
+    align-items: center; justify-content: center; cursor: pointer;
+  }
+  .body { display: grid; grid-template-columns: 220px 1fr; overflow: hidden; height: 100%; }
+  .sidebar {
+    background: var(--sidebar-bg);
+    border-right: 0.5px solid var(--separator);
+    overflow-y: auto;
+    padding: 14px 10px 20px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .sidebar-section-title {
+    font-size: 11px; font-weight: 600; color: var(--text-tertiary);
+    text-transform: uppercase; letter-spacing: 0.04em; padding: 0 8px 4px;
+  }
+  .sidebar-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 8px; border-radius: 6px;
+    font-size: 13px; color: var(--text-primary); cursor: pointer;
+    transition: background 0.12s, color 0.12s;
+    user-select: none; -webkit-user-select: none;
+  }
+  .sidebar-item:hover { background: var(--sidebar-item-hover); }
+  .sidebar-item.active { background: var(--sidebar-item-active); color: white; }
+  .sidebar-item .icon { width: 18px; height: 18px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sidebar-item .label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .sidebar-item .count {
+    font-size: 11px; color: var(--text-tertiary);
+    background: rgba(0,0,0,0.06); border-radius: 8px; padding: 1px 7px;
+    font-variant-numeric: tabular-nums;
+  }
+  .sidebar-item.active .count { background: rgba(255,255,255,0.25); color: white; }
+  .sidebar-stats {
+    margin-top: auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+    padding: 8px 4px 0; border-top: 0.5px solid var(--separator);
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.4);
+    border: 0.5px solid var(--separator);
+    border-radius: 8px; padding: 8px 10px;
+  }
+  @media (prefers-color-scheme: dark) { .stat-card { background: rgba(255,255,255,0.05); } }
+  .stat-card .stat-value { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat-card .stat-label { font-size: 10px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 1px; }
+  .content { display: grid; grid-template-rows: auto 1fr; overflow: hidden; background: var(--content-bg); position: relative; }
+  .toolbar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; border-bottom: 0.5px solid var(--separator); flex-wrap: nowrap; }
+  .search-wrapper { flex: 1; max-width: 380px; position: relative; }
+  .search-wrapper svg { position: absolute; left: 8px; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); }
+  .search {
+    width: 100%; height: 32px;
+    background: rgba(0,0,0,0.06); border: none; border-radius: 8px;
+    padding: 0 10px 0 28px; font-size: 14px; color: var(--text-primary);
+    font-family: inherit; outline: none;
+    transition: background 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+  }
+  @media (prefers-color-scheme: dark) { .search { background: rgba(255,255,255,0.08); } }
+  .search:focus { background: rgba(255,255,255,0.85); box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.3); }
+  @media (prefers-color-scheme: dark) { .search:focus { background: rgba(255,255,255,0.12); } }
+  .toolbar-spacer { flex: 1; }
+  .segmented { display: inline-flex; background: rgba(0,0,0,0.06); border-radius: 6px; padding: 2px; gap: 2px; flex-shrink: 0; }
+  @media (prefers-color-scheme: dark) { .segmented { background: rgba(255,255,255,0.08); } }
+  .segmented button {
+    background: transparent; border: none;
+    padding: 4px 10px; border-radius: 5px;
+    font-size: 12px; font-weight: 500; color: var(--text-secondary);
+    cursor: pointer; font-family: inherit;
+    transition: background 0.12s, color 0.12s; white-space: nowrap;
+  }
+  .segmented button.active { background: white; color: var(--text-primary); box-shadow: 0 0 0 0.5px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.08); }
+  @media (prefers-color-scheme: dark) { .segmented button.active { background: rgba(255,255,255,0.18); } }
+  .icon-button {
+    width: 32px; height: 32px; background: transparent; border: none;
+    border-radius: 6px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--text-secondary);
+    transition: background 0.12s, transform 0.1s; flex-shrink: 0;
+  }
+  .icon-button:hover { background: rgba(0,0,0,0.06); }
+  @media (prefers-color-scheme: dark) { .icon-button:hover { background: rgba(255,255,255,0.08); } }
+  .icon-button:active { transform: scale(0.92); }
+  .refresh-status { font-size: 11px; color: var(--text-tertiary); font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
+  .net-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px currentColor;
+    color: var(--green);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .net-dot.offline { background: var(--text-tertiary); color: transparent; box-shadow: none; }
+  .pull-indicator {
+    position: absolute; top: 0; left: 50%;
+    transform: translate(-50%, -100%);
+    padding: 8px 14px;
+    background: var(--card-bg); border: 0.5px solid var(--card-border);
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    font-size: 12px; font-weight: 500; color: var(--text-primary);
+    z-index: 10;
+    display: flex; align-items: center; gap: 6px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .pull-indicator.visible { opacity: 1; transform: translate(-50%, 12px); }
+  .pull-indicator .spinner-mini {
+    width: 12px; height: 12px;
+    border: 1.5px solid rgba(0,0,0,0.15);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  .scroll-area { overflow-y: auto; padding: 16px 18px 24px; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+  .repo-card {
+    background: var(--card-bg); border: 0.5px solid var(--card-border);
+    border-radius: 12px; padding: 14px;
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.18s, border-color 0.18s;
+    box-shadow: var(--card-shadow);
+    display: flex; flex-direction: column; gap: 8px;
+    position: relative; overflow: hidden;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    text-decoration: none; color: inherit;
+    animation: cardIn 0.3s cubic-bezier(0.32, 0.72, 0, 1) both;
+  }
+  @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .repo-card:hover { transform: translateY(-2px); box-shadow: var(--card-shadow-hover); border-color: rgba(0,122,255,0.35); }
+  .repo-card:active { transform: scale(0.985); }
+  .repo-card-header { display: flex; align-items: center; gap: 8px; }
+  .repo-icon {
+    width: 28px; height: 28px; border-radius: 7px;
+    background: linear-gradient(135deg, var(--accent), #5ac8fa);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; flex-shrink: 0;
+    text-transform: uppercase; letter-spacing: -0.02em;
+    box-shadow: 0 2px 6px rgba(0, 122, 255, 0.25);
+  }
+  .repo-name { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+  .repo-badges { display: inline-flex; gap: 4px; flex-shrink: 0; }
+  .badge { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; line-height: 1.4; }
+  .badge.archived { background: rgba(255, 159, 10, 0.18); color: #b86b00; }
+  .badge.fork     { background: rgba(175, 82, 222, 0.18); color: #7e3aae; }
+  .badge.private  { background: rgba(255, 59, 48, 0.18); color: #c2271e; }
+  .badge.template { background: rgba(48, 209, 88, 0.18); color: #1a7f3c; }
+  @media (prefers-color-scheme: dark) {
+    .badge.archived { color: #ffb74d; }
+    .badge.fork     { color: #d4a4ee; }
+    .badge.private  { color: #ff7b73; }
+    .badge.template { color: #6ce39a; }
+  }
+  .repo-description {
+    font-size: 12px; line-height: 1.45; color: var(--text-secondary);
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; min-height: 35px;
+  }
+  .repo-description.empty { font-style: italic; color: var(--text-tertiary); }
+  .repo-meta { display: flex; align-items: center; gap: 12px; font-size: 11px; color: var(--text-secondary); margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
+  .repo-meta .meta { display: inline-flex; align-items: center; gap: 4px; font-variant-numeric: tabular-nums; }
+  .lang-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text-tertiary); box-shadow: 0 0 0 0.5px rgba(0,0,0,0.08); flex-shrink: 0; }
+  .updated-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 8px; border-top: 0.5px solid var(--separator);
+    font-size: 11px; color: var(--text-tertiary); font-variant-numeric: tabular-nums;
+  }
+  .updated-pill { background: var(--accent-soft); color: var(--accent); padding: 2px 7px; border-radius: 4px; font-weight: 600; font-size: 10px; }
+  .updated-pill.stale { background: rgba(142, 142, 147, 0.18); color: var(--text-secondary); }
+  .updated-pill.fresh { background: rgba(48, 209, 88, 0.18); color: #1a7f3c; }
+  @media (prefers-color-scheme: dark) { .updated-pill.fresh { color: #6ce39a; } }
+  .loader, .empty, .error {
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    height: 60vh; gap: 12px; color: var(--text-secondary); text-align: center; padding: 40px;
+  }
+  .loader .big, .empty .big, .error .big { font-size: 16px; font-weight: 600; color: var(--text-primary); }
+  .spinner { width: 22px; height: 22px; border: 2px solid rgba(0,0,0,0.1); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .spinning { animation: spin 0.7s linear infinite; }
+  .cache-banner {
+    background: rgba(255, 159, 10, 0.15);
+    color: var(--orange);
+    padding: 6px 16px;
+    font-size: 12px; font-weight: 500;
+    border-bottom: 0.5px solid rgba(255, 159, 10, 0.25);
+    display: none;
+    align-items: center; gap: 6px;
+  }
+  .cache-banner.visible { display: flex; }
+  .drawer-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4); z-index: 100;
+    opacity: 0; transition: opacity 0.25s;
+    -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+  }
+  .drawer-overlay.visible { display: block; opacity: 1; }
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.18); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.32); }
+  @media (prefers-color-scheme: dark) { ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); } }
+
+  .update-toast {
+    position: fixed;
+    bottom: calc(20px + var(--safe-bottom));
+    left: 50%;
+    transform: translate(-50%, 200%);
+    padding: 12px 14px 12px 16px;
+    background: var(--card-bg);
+    border: 0.5px solid var(--card-border);
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    z-index: 200;
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13px; color: var(--text-primary);
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+    max-width: calc(100vw - 32px);
+  }
+  .update-toast.visible { transform: translate(-50%, 0); }
+  .update-toast .pill {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    flex-shrink: 0;
+  }
+  .update-toast .reload-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.12s, transform 0.1s;
+  }
+  .update-toast .reload-btn:hover { filter: brightness(1.05); }
+  .update-toast .reload-btn:active { transform: scale(0.96); }
+  .update-toast .dismiss {
+    background: transparent; border: none;
+    color: var(--text-tertiary); cursor: pointer;
+    font-size: 18px; padding: 0 4px; line-height: 1;
+  }
+
+  @media (max-width: 760px) {
+    body { padding: 0; background: var(--bg-wallpaper-1); }
+    .window {
+      border-radius: 0; border: none; box-shadow: none;
+      grid-template-rows: auto auto 1fr;
+    }
+    .titlebar {
+      grid-template-columns: 44px 1fr 44px;
+      padding-top: var(--safe-top);
+      height: calc(44px + var(--safe-top));
+      background: var(--window-bg);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+    }
+    .traffic-lights { display: none; }
+    .menu-btn { display: inline-flex; }
+    .titlebar-center { font-size: 17px; font-weight: 700; }
+    .body { grid-template-columns: 1fr; }
+    .sidebar {
+      position: fixed; top: 0; left: 0;
+      width: 80%; max-width: 320px; height: 100%;
+      z-index: 101;
+      background: var(--window-bg);
+      backdrop-filter: blur(40px) saturate(180%);
+      -webkit-backdrop-filter: blur(40px) saturate(180%);
+      border-right: 0.5px solid var(--separator);
+      transform: translateX(-100%);
+      transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+      padding-top: calc(var(--safe-top) + 14px);
+      padding-bottom: calc(var(--safe-bottom) + 20px);
+    }
+    .sidebar.open { transform: translateX(0); }
+    .sidebar-item { padding: 10px 10px; font-size: 16px; }
+    .sidebar-item .icon { width: 22px; height: 22px; }
+    .sidebar-item .count { font-size: 13px; padding: 2px 9px; }
+    .sidebar-section-title { font-size: 12px; padding: 4px 10px 6px; }
+    .toolbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+    .search-wrapper { max-width: none; flex: 1 1 100%; order: 1; }
+    .search { height: 36px; font-size: 16px; }
+    .segmented { order: 2; flex: 1; overflow-x: auto; max-width: calc(100% - 80px); }
+    .segmented button { padding: 6px 12px; font-size: 13px; }
+    .icon-button { order: 3; width: 36px; height: 36px; }
+    .refresh-status { order: 4; flex-basis: 100%; justify-content: flex-end; padding-right: 4px; }
+    .toolbar-spacer { display: none; }
+    .scroll-area { padding: 12px 12px calc(20px + var(--safe-bottom)); }
+    .grid { grid-template-columns: 1fr; gap: 10px; }
+    .repo-card { padding: 16px; border-radius: 14px; }
+    .repo-card:hover { transform: none; }
+    .update-toast { left: 16px; right: 16px; transform: translate(0, 200%); }
+    .update-toast.visible { transform: translate(0, 0); }
+  }
+  @media (display-mode: standalone) { .install-hint { display: none !important; } }
+  .install-hint {
+    display: none; position: fixed;
+    bottom: calc(20px + var(--safe-bottom));
+    left: 16px; right: 16px;
+    padding: 12px 16px;
+    background: var(--card-bg); border: 0.5px solid var(--card-border);
+    border-radius: 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    backdrop-filter: blur(30px) saturate(180%); -webkit-backdrop-filter: blur(30px) saturate(180%);
+    font-size: 13px; color: var(--text-primary); z-index: 50; line-height: 1.45;
+    animation: slideUp 0.4s cubic-bezier(0.32, 0.72, 0, 1) 1.5s both;
+  }
+  @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .install-hint .row { display: flex; align-items: center; gap: 10px; }
+  .install-hint b { color: var(--accent); }
+  .install-hint .close { background: transparent; border: none; color: var(--text-tertiary); font-size: 18px; padding: 0 4px; cursor: pointer; }
+  @media (max-width: 760px) { .install-hint.show { display: block; } }
+</style>
+</head>
+<body>
+
+<div class="window" role="application" aria-label="Solar Mason Repositories">
+  <div class="titlebar">
+    <div class="traffic-lights" aria-hidden="true">
+      <span class="light red"></span><span class="light yellow"></span><span class="light green"></span>
+    </div>
+    <button class="menu-btn" id="menu-btn" aria-label="Open filters">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg>
+    </button>
+    <div class="titlebar-center">Solar Mason — Repositories</div>
+    <div></div>
+  </div>
+
+  <div class="cache-banner" id="cache-banner">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span id="cache-banner-text">Showing cached data</span>
+  </div>
+
+  <div class="body">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <aside class="sidebar" id="sidebar">
+      <div>
+        <div class="sidebar-section-title">Filter</div>
+        <div class="sidebar-item active" data-filter="all">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+          <span class="label">All Repositories</span><span class="count" id="count-all">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="active">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+          <span class="label">Active (30 days)</span><span class="count" id="count-active">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="stale">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          <span class="label">Stale (90+ days)</span><span class="count" id="count-stale">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="forks">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg></span>
+          <span class="label">Forks</span><span class="count" id="count-forks">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="archived">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/></svg></span>
+          <span class="label">Archived</span><span class="count" id="count-archived">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="issues">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <span class="label">Has Issues</span><span class="count" id="count-issues">0</span>
+        </div>
+        <div class="sidebar-item" data-filter="starred">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+          <span class="label">Starred</span><span class="count" id="count-starred">0</span>
+        </div>
+      </div>
+      <div>
+        <div class="sidebar-section-title">Languages</div>
+        <div id="lang-list"></div>
+      </div>
+      <div class="sidebar-stats">
+        <div class="stat-card"><div class="stat-value" id="stat-total">—</div><div class="stat-label">Repos</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-stars">—</div><div class="stat-label">Stars</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-forks">—</div><div class="stat-label">Forks</div></div>
+        <div class="stat-card"><div class="stat-value" id="stat-issues">—</div><div class="stat-label">Issues</div></div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <div class="pull-indicator" id="pull-indicator">
+        <span class="spinner-mini"></span><span id="pull-text">Pull to refresh</span>
+      </div>
+      <div class="toolbar">
+        <div class="search-wrapper">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search" class="search" placeholder="Search repositories…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        </div>
+        <div class="toolbar-spacer"></div>
+        <div class="segmented" role="tablist" aria-label="Sort by">
+          <button data-sort="updated" class="active">Updated</button>
+          <button data-sort="pushed">Pushed</button>
+          <button data-sort="created">Created</button>
+          <button data-sort="name">Name</button>
+          <button data-sort="stars">Stars</button>
+        </div>
+        <button class="icon-button" id="refresh-btn" title="Refresh" aria-label="Refresh">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <span class="refresh-status" id="refresh-status">
+          <span class="net-dot" id="net-dot" title="Online"></span>
+          <span id="refresh-status-text">—</span>
+        </span>
+      </div>
+      <div class="scroll-area" id="scroll-area">
+        <div class="loader" id="loader">
+          <div class="spinner"></div><div>Loading repositories…</div>
+        </div>
+        <div class="grid" id="grid" style="display:none;"></div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="install-hint" id="install-hint">
+  <div class="row">
+    <span style="flex:1">Tap <b>Share</b> → <b>Add to Home Screen</b> to install.</span>
+    <button class="close" id="install-hint-close" aria-label="Dismiss">×</button>
+  </div>
+</div>
+
+<div class="update-toast" id="update-toast" role="alert" aria-live="polite">
+  <span class="pill"></span>
+  <span style="flex:1">A new version is available.</span>
+  <button class="reload-btn" id="update-reload">Reload</button>
+  <button class="dismiss" id="update-dismiss" aria-label="Dismiss">×</button>
+</div>
+
+<script>
+  /* Service Worker registration + update lifecycle */
+  (function() {
+    if (!('serviceWorker' in navigator)) return;
+
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (refreshing) return;
+      refreshing = true;
+      window.location.reload();
+    });
+
+    function showUpdateToast(waitingSW) {
+      const toast = document.getElementById('update-toast');
+      const reload = document.getElementById('update-reload');
+      const dismiss = document.getElementById('update-dismiss');
+      toast.classList.add('visible');
+      const onReload = () => {
+        if (waitingSW) waitingSW.postMessage({ type: 'SKIP_WAITING' });
+        toast.classList.remove('visible');
+      };
+      const onDismiss = () => toast.classList.remove('visible');
+      reload.addEventListener('click', onReload, { once: true });
+      dismiss.addEventListener('click', onDismiss, { once: true });
+    }
+
+    function trackInstalling(reg) {
+      const sw = reg.installing;
+      if (!sw) return;
+      sw.addEventListener('statechange', () => {
+        if (sw.state === 'installed' && navigator.serviceWorker.controller) {
+          showUpdateToast(reg.waiting || sw);
+        }
+      });
+    }
+
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then((reg) => {
+          if (reg.waiting && navigator.serviceWorker.controller) {
+            showUpdateToast(reg.waiting);
+          }
+          reg.addEventListener('updatefound', () => trackInstalling(reg));
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) reg.update().catch(() => {});
+          });
+          setInterval(() => reg.update().catch(() => {}), 30 * 60 * 1000);
+        })
+        .catch((err) => { console.warn('SW registration failed:', err); });
+    });
+  })();
+</script>
+
+<script>
+  /* App */
+  const GITHUB_USER = 'SolarMason';
+  const REFRESH_MS  = 5 * 60 * 1000;
+  const PER_PAGE    = 100;
+  const CACHE_KEY   = 'solarmason-repo-cache-v5';
+
+  const LANG_COLORS = {
+    JavaScript:'#f1e05a', TypeScript:'#3178c6', Python:'#3572A5',
+    HTML:'#e34c26', CSS:'#563d7c', SCSS:'#c6538c', Shell:'#89e051',
+    Java:'#b07219', Kotlin:'#A97BFF', Swift:'#F05138',
+    'Objective-C':'#438eff', Go:'#00ADD8', Rust:'#dea584',
+    C:'#555555', 'C++':'#f34b7d', 'C#':'#178600',
+    PHP:'#4F5D95', Ruby:'#701516', Dart:'#00B4AB',
+    Vue:'#41b883', Svelte:'#ff3e00', Lua:'#000080',
+    Dockerfile:'#384d54', YAML:'#cb171e', JSON:'#292929',
+    Markdown:'#083fa1', Jupyter:'#DA5B0B', R:'#198CE7',
+    Solidity:'#AA6746', PowerShell:'#012456', Makefile:'#427819',
+    Astro:'#ff5a03', Zig:'#ec915c', Nix:'#7e7eff'
+  };
+
+  const cache = {
+    available: (() => {
+      try { localStorage.setItem('__t__','1'); localStorage.removeItem('__t__'); return true; }
+      catch { return false; }
+    })(),
+    save(repos) {
+      if (!this.available) return;
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), repos })); }
+      catch (e) { console.warn('Cache save failed:', e); }
+    },
+    load() {
+      if (!this.available) return null;
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (!parsed.repos || !Array.isArray(parsed.repos)) return null;
+        return parsed;
+      } catch { return null; }
+    }
+  };
+
+  const state = { repos: [], filter: 'all', sort: 'updated', search: '', lastFetch: null };
+  const $  = sel => document.querySelector(sel);
+  const $$ = sel => document.querySelectorAll(sel);
+
+  function relativeTime(iso) {
+    const sec = Math.floor((Date.now() - new Date(iso)) / 1000);
+    if (sec < 60)        return 'just now';
+    if (sec < 3600)      return Math.floor(sec/60) + 'm ago';
+    if (sec < 86400)     return Math.floor(sec/3600) + 'h ago';
+    if (sec < 86400*7)   return Math.floor(sec/86400) + 'd ago';
+    if (sec < 86400*30)  return Math.floor(sec/(86400*7)) + 'w ago';
+    if (sec < 86400*365) return Math.floor(sec/(86400*30)) + 'mo ago';
+    return Math.floor(sec/(86400*365)) + 'y ago';
+  }
+  function freshness(iso) {
+    const days = (Date.now() - new Date(iso)) / (1000*60*60*24);
+    if (days < 7)  return 'fresh';
+    if (days < 90) return '';
+    return 'stale';
+  }
+  function fmtNumber(n) { return n >= 1000 ? (n/1000).toFixed(1).replace(/\.0$/,'') + 'k' : String(n); }
+  function fmtDate(iso) { return new Date(iso).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' }); }
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+  async function fetchAllRepos() {
+    const out = [];
+    let page = 1;
+    while (true) {
+      const url = `https://api.github.com/users/${GITHUB_USER}/repos?per_page=${PER_PAGE}&page=${page}&sort=updated`;
+      const res = await fetch(url, { headers: { 'Accept': 'application/vnd.github+json' } });
+      if (!res.ok) {
+        if (res.status === 403) throw new Error('GitHub rate limit reached. Showing cached data — try again in a few minutes.');
+        throw new Error('GitHub API error: ' + res.status);
+      }
+      const batch = await res.json();
+      out.push(...batch);
+      if (batch.length < PER_PAGE) break;
+      page++; if (page > 10) break;
+    }
+    return out;
+  }
+
+  function passesFilter(r) {
+    const days = (Date.now() - new Date(r.pushed_at)) / (1000*60*60*24);
+    switch (state.filter) {
+      case 'all':      return true;
+      case 'active':   return days <= 30 && !r.archived;
+      case 'stale':    return days >= 90 && !r.archived;
+      case 'forks':    return r.fork === true;
+      case 'archived': return r.archived === true;
+      case 'issues':   return r.open_issues_count > 0;
+      case 'starred':  return r.stargazers_count > 0;
+      default:
+        if (state.filter.startsWith('lang:')) return (r.language || 'Unknown') === state.filter.slice(5);
+        return true;
+    }
+  }
+  function passesSearch(r) {
+    if (!state.search) return true;
+    const q = state.search.toLowerCase();
+    return ((r.name||'').toLowerCase().includes(q)
+         || (r.description||'').toLowerCase().includes(q)
+         || (r.language||'').toLowerCase().includes(q)
+         || (r.topics||[]).some(t => t.toLowerCase().includes(q)));
+  }
+  function sortRepos(list) {
+    return [...list].sort((a,b) => {
+      switch (state.sort) {
+        case 'updated': return new Date(b.updated_at) - new Date(a.updated_at);
+        case 'pushed':  return new Date(b.pushed_at)  - new Date(a.pushed_at);
+        case 'created': return new Date(b.created_at) - new Date(a.created_at);
+        case 'name':    return a.name.localeCompare(b.name);
+        case 'stars':   return b.stargazers_count - a.stargazers_count;
+        default: return 0;
+      }
+    });
+  }
+
+  function renderCard(r) {
+    const langColor = LANG_COLORS[r.language] || '#8e8e93';
+    const fresh = freshness(r.pushed_at);
+    const initials = (r.name.match(/[a-zA-Z0-9]/g) || ['?'])[0];
+    const hue = [...r.name].reduce((a,c) => a + c.charCodeAt(0), 0) % 360;
+    const iconBg = `linear-gradient(135deg, hsl(${hue} 80% 55%), hsl(${(hue+45)%360} 75% 60%))`;
+    const badges = [];
+    if (r.archived)    badges.push('<span class="badge archived">Archived</span>');
+    if (r.fork)        badges.push('<span class="badge fork">Fork</span>');
+    if (r.private)     badges.push('<span class="badge private">Private</span>');
+    if (r.is_template) badges.push('<span class="badge template">Template</span>');
+    const description = r.description
+      ? `<div class="repo-description">${escapeHtml(r.description)}</div>`
+      : `<div class="repo-description empty">No description</div>`;
+    const langPart = r.language
+      ? `<span class="meta"><span class="lang-dot" style="background:${langColor}"></span>${escapeHtml(r.language)}</span>`
+      : '';
+    return `
+      <a class="repo-card" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+        <div class="repo-card-header">
+          <div class="repo-icon" style="background:${iconBg}">${escapeHtml(initials)}</div>
+          <div class="repo-name">${escapeHtml(r.name)}</div>
+          <div class="repo-badges">${badges.join('')}</div>
+        </div>
+        ${description}
+        <div class="repo-meta">
+          ${langPart}
+          <span class="meta" title="Stars">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            ${r.stargazers_count}
+          </span>
+          <span class="meta" title="Forks">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="12" cy="18" r="3"/><path d="M6 9v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V9"/></svg>
+            ${r.forks_count}
+          </span>
+          <span class="meta" title="Open issues">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            ${r.open_issues_count}
+          </span>
+        </div>
+        <div class="updated-row">
+          <span title="Last commit pushed: ${fmtDate(r.pushed_at)}">Pushed ${relativeTime(r.pushed_at)}</span>
+          <span class="updated-pill ${fresh}" title="Last metadata update: ${fmtDate(r.updated_at)}">${relativeTime(r.updated_at)}</span>
+        </div>
+      </a>
+    `;
+  }
+
+  function renderLanguageList() {
+    const counts = {};
+    for (const r of state.repos) {
+      const k = r.language || 'Unknown';
+      counts[k] = (counts[k] || 0) + 1;
+    }
+    const html = Object.entries(counts).sort((a,b) => b[1]-a[1]).map(([lang,n]) => {
+      const color = LANG_COLORS[lang] || '#8e8e93';
+      const isActive = state.filter === 'lang:'+lang ? 'active' : '';
+      return `<div class="sidebar-item ${isActive}" data-filter="lang:${escapeHtml(lang)}">
+        <span class="icon"><span class="lang-dot" style="background:${color}"></span></span>
+        <span class="label">${escapeHtml(lang)}</span>
+        <span class="count">${n}</span>
+      </div>`;
+    }).join('');
+    $('#lang-list').innerHTML = html;
+  }
+
+  function renderCounts() {
+    const all = state.repos;
+    const days = r => (Date.now() - new Date(r.pushed_at)) / (1000*60*60*24);
+    const counts = {
+      all: all.length,
+      active:   all.filter(r => days(r) <= 30 && !r.archived).length,
+      stale:    all.filter(r => days(r) >= 90 && !r.archived).length,
+      forks:    all.filter(r => r.fork).length,
+      archived: all.filter(r => r.archived).length,
+      issues:   all.filter(r => r.open_issues_count > 0).length,
+      starred:  all.filter(r => r.stargazers_count > 0).length,
+    };
+    for (const [k,v] of Object.entries(counts)) {
+      const el = document.getElementById('count-'+k);
+      if (el) el.textContent = v;
+    }
+    $('#stat-total').textContent  = fmtNumber(all.length);
+    $('#stat-stars').textContent  = fmtNumber(all.reduce((s,r) => s+r.stargazers_count, 0));
+    $('#stat-forks').textContent  = fmtNumber(all.reduce((s,r) => s+r.forks_count, 0));
+    $('#stat-issues').textContent = fmtNumber(all.reduce((s,r) => s+r.open_issues_count, 0));
+  }
+
+  function renderGrid() {
+    const visible = sortRepos(state.repos.filter(r => passesFilter(r) && passesSearch(r)));
+    const grid = $('#grid');
+    if (state.repos.length === 0) return;
+    if (visible.length === 0) {
+      grid.style.display = 'none';
+      $('#loader').style.display = 'flex';
+      $('#loader').innerHTML = `
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" style="opacity:.4"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="big">No matches</div><div>Try a different search or filter.</div>`;
+      return;
+    }
+    $('#loader').style.display = 'none';
+    grid.style.display = 'grid';
+    grid.innerHTML = visible.map(renderCard).join('');
+  }
+
+  function setRefreshStatus(t) { $('#refresh-status-text').textContent = t; }
+  function showCacheBanner(t) {
+    const b = $('#cache-banner');
+    if (t) { $('#cache-banner-text').textContent = t; b.classList.add('visible'); }
+    else b.classList.remove('visible');
+  }
+  function setOnline(online) {
+    const dot = $('#net-dot');
+    if (online) { dot.classList.remove('offline'); dot.title = 'Online'; }
+    else { dot.classList.add('offline'); dot.title = 'Offline'; }
+  }
+
+  function loadFromCache() {
+    const cached = cache.load();
+    if (!cached) return false;
+    state.repos = cached.repos;
+    state.lastFetch = new Date(cached.ts);
+    renderCounts(); renderLanguageList(); renderGrid();
+    const ageMin = Math.floor((Date.now() - cached.ts) / 60000);
+    setRefreshStatus(`Cache · ${ageMin}m old`);
+    return true;
+  }
+
+  async function refresh(showSpinnerInButton = false) {
+    const btn = $('#refresh-btn');
+    if (showSpinnerInButton) btn.classList.add('spinning');
+    setRefreshStatus('refreshing…');
+    try {
+      const repos = await fetchAllRepos();
+      state.repos = repos;
+      state.lastFetch = new Date();
+      cache.save(repos);
+      renderCounts(); renderLanguageList(); renderGrid();
+      showCacheBanner('');
+      setRefreshStatus('Updated ' + state.lastFetch.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' }));
+    } catch (err) {
+      console.error(err);
+      if (state.repos.length > 0) {
+        showCacheBanner("Couldn't refresh — " + err.message);
+        setRefreshStatus('cached');
+      } else {
+        $('#loader').style.display = 'flex';
+        $('#grid').style.display = 'none';
+        $('#loader').innerHTML = `
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" style="color:var(--red);opacity:.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <div class="big">Couldn't load repositories</div>
+          <div style="max-width:420px;line-height:1.5">${escapeHtml(err.message)}</div>`;
+        setRefreshStatus('error');
+      }
+    } finally {
+      btn.classList.remove('spinning');
+    }
+  }
+
+  function openDrawer()  { $('#sidebar').classList.add('open');    $('#drawer-overlay').classList.add('visible'); }
+  function closeDrawer() { $('#sidebar').classList.remove('open'); $('#drawer-overlay').classList.remove('visible'); }
+  $('#menu-btn').addEventListener('click', openDrawer);
+  $('#drawer-overlay').addEventListener('click', closeDrawer);
+
+  (function() {
+    const scroll = $('#scroll-area');
+    const indicator = $('#pull-indicator');
+    const text = $('#pull-text');
+    let startY = 0, pulling = false, pullDistance = 0;
+    const threshold = 70;
+    scroll.addEventListener('touchstart', e => {
+      if (scroll.scrollTop <= 0) { startY = e.touches[0].clientY; pulling = true; pullDistance = 0; }
+    }, { passive: true });
+    scroll.addEventListener('touchmove', e => {
+      if (!pulling) return;
+      pullDistance = e.touches[0].clientY - startY;
+      if (pullDistance > 0 && scroll.scrollTop <= 0 && pullDistance > 30) {
+        indicator.classList.add('visible');
+        text.textContent = pullDistance > threshold ? 'Release to refresh' : 'Pull to refresh';
+      }
+    }, { passive: true });
+    scroll.addEventListener('touchend', () => {
+      if (pulling && pullDistance > threshold) {
+        text.textContent = 'Refreshing…';
+        refresh(false).finally(() => setTimeout(() => indicator.classList.remove('visible'), 400));
+      } else {
+        indicator.classList.remove('visible');
+      }
+      pulling = false; pullDistance = 0;
+    });
+  })();
+
+  (function() {
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const isSafari = /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent);
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+    let dismissed = false;
+    try { dismissed = localStorage.getItem('install-hint-dismissed') === '1'; } catch {}
+    if (isiOS && isSafari && !isStandalone && !dismissed) {
+      setTimeout(() => $('#install-hint').classList.add('show'), 1500);
+    }
+    $('#install-hint-close').addEventListener('click', () => {
+      $('#install-hint').classList.remove('show');
+      try { localStorage.setItem('install-hint-dismissed', '1'); } catch {}
+    });
+  })();
+
+  setOnline(navigator.onLine);
+  window.addEventListener('online',  () => { setOnline(true);  refresh(false); });
+  window.addEventListener('offline', () => { setOnline(false); setRefreshStatus('offline'); });
+
+  $('#search').addEventListener('input', e => { state.search = e.target.value.trim(); renderGrid(); });
+  $$('.segmented button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$('.segmented button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.sort = btn.dataset.sort;
+      renderGrid();
+    });
+  });
+  $('#sidebar').addEventListener('click', e => {
+    const item = e.target.closest('.sidebar-item');
+    if (!item) return;
+    state.filter = item.dataset.filter;
+    $$('#sidebar .sidebar-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    renderGrid();
+    if (window.innerWidth <= 760) closeDrawer();
+  });
+  $('#refresh-btn').addEventListener('click', () => refresh(true));
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'f') { e.preventDefault(); $('#search').focus(); $('#search').select(); }
+    if ((e.metaKey || e.ctrlKey) && e.key === 'r') { e.preventDefault(); refresh(true); }
+    if (e.key === 'Escape' && document.activeElement === $('#search')) { $('#search').value=''; state.search=''; renderGrid(); }
+  });
+  setInterval(() => refresh(false), REFRESH_MS);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && state.lastFetch) {
+      const ageMs = Date.now() - state.lastFetch.getTime();
+      if (ageMs > 60000) refresh(false);
+    }
+  });
+
+  loadFromCache();
+  refresh(false);
+</script>
+
+</body>
+</html>
