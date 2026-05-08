@@ -3,7 +3,7 @@
    Deploys to: https://repo.nepa-pro.com/
    ============================================================================ */
 
-const CACHE_VERSION = 'v6';
+const CACHE_VERSION = 'v7';
 const SHELL_CACHE   = `solarmason-shell-${CACHE_VERSION}`;
 const API_CACHE     = `solarmason-api-${CACHE_VERSION}`;
 const FONT_CACHE    = `solarmason-fonts-${CACHE_VERSION}`;

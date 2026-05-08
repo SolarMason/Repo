@@ -408,54 +408,54 @@
   .scroll-area { overflow-y: auto; padding: 14px 16px 24px; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain; }
 
   /* ============================================================
-     COMPACT REPO CARDS — fixed height, license-focused
+     ULTRA-COMPACT REPO CARDS — small fixed-height tiles
      ============================================================ */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
   }
 
   .repo-card {
     background: var(--card-bg); border: 0.5px solid var(--card-border);
-    border-radius: 10px; padding: 10px 12px;
+    border-radius: 8px; padding: 7px 9px;
     cursor: pointer;
     transition: transform 0.18s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.18s, border-color 0.18s;
     box-shadow: var(--card-shadow);
-    display: grid;
-    grid-template-rows: auto auto auto auto;
-    gap: 5px;
+    display: flex; flex-direction: column;
+    gap: 3px;
     position: relative; overflow: hidden;
     backdrop-filter: blur(20px) saturate(160%);
     -webkit-backdrop-filter: blur(20px) saturate(160%);
     text-decoration: none; color: inherit;
-    height: 124px;
+    height: 78px;
     animation: cardIn 0.2s cubic-bezier(0.32, 0.72, 0, 1) both;
   }
   @keyframes cardIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
   .repo-card:hover { transform: translateY(-1px); box-shadow: var(--card-shadow-hover); border-color: rgba(0,122,255,0.30); }
   .repo-card:active { transform: scale(0.99); }
 
-  .repo-card-header { display: flex; align-items: center; gap: 7px; min-width: 0; }
+  .repo-card-header { display: flex; align-items: center; gap: 6px; min-width: 0; }
   .repo-icon {
-    width: 22px; height: 22px; border-radius: 5px;
+    width: 18px; height: 18px; border-radius: 4px;
     color: white;
     display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 11px; flex-shrink: 0;
+    font-weight: 700; font-size: 10px; flex-shrink: 0;
     text-transform: uppercase; letter-spacing: -0.02em;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   }
   .repo-name {
-    font-size: 13.5px; font-weight: 600; letter-spacing: -0.01em;
+    font-size: 12.5px; font-weight: 600; letter-spacing: -0.01em;
     color: var(--text-primary);
     overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     flex: 1; min-width: 0;
+    line-height: 1.2;
   }
   .repo-badges { display: inline-flex; gap: 3px; flex-shrink: 0; }
   .badge {
-    font-size: 9px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.05em; padding: 1px 5px; border-radius: 3px;
-    line-height: 1.4;
+    font-size: 8.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; padding: 0 4px; border-radius: 3px;
+    line-height: 1.5;
   }
   .badge.archived { background: rgba(255, 159, 10, 0.18); color: #b86b00; }
   .badge.fork     { background: rgba(175, 82, 222, 0.18); color: #7e3aae; }
@@ -469,9 +469,9 @@
   }
 
   .card-menu-btn {
-    width: 22px; height: 22px;
+    width: 18px; height: 18px;
     background: transparent; border: none;
-    border-radius: 4px; cursor: pointer;
+    border-radius: 3px; cursor: pointer;
     color: var(--text-tertiary);
     display: inline-flex; align-items: center; justify-content: center;
     transition: background 0.12s, color 0.12s;
@@ -482,77 +482,66 @@
   @media (prefers-color-scheme: dark) { .card-menu-btn:hover { background: rgba(255,255,255,0.10); } }
 
   .repo-meta {
-    display: flex; align-items: center; gap: 9px;
-    font-size: 11px; color: var(--text-secondary);
+    display: flex; align-items: center; gap: 7px;
+    font-size: 10.5px; color: var(--text-secondary);
     flex-wrap: nowrap; overflow: hidden;
+    line-height: 1.3;
   }
   .repo-meta .meta {
-    display: inline-flex; align-items: center; gap: 3px;
+    display: inline-flex; align-items: center; gap: 2px;
     font-variant-numeric: tabular-nums; flex-shrink: 0;
   }
   .repo-meta .meta-grow { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .lang-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--text-tertiary); box-shadow: 0 0 0 0.5px rgba(0,0,0,0.08); flex-shrink: 0; }
+  .lang-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-tertiary); box-shadow: 0 0 0 0.5px rgba(0,0,0,0.08); flex-shrink: 0; }
 
-  /* License badges */
+  /* License badges (inline in meta row) */
   .lic {
     display: inline-flex; align-items: center; gap: 3px;
-    padding: 1px 5px; border-radius: 3px;
-    font-size: 9.5px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 0 4px; border-radius: 3px;
+    font-size: 9px; font-weight: 700; letter-spacing: 0.02em;
     flex-shrink: 0;
     font-variant-numeric: tabular-nums;
+    line-height: 1.5;
   }
   .lic.permissive    { background: rgba(48, 209, 88, 0.16); color: #1a7f3c; }
   .lic.weak-copyleft { background: rgba(255, 159, 10, 0.18); color: #b86b00; }
   .lic.strong-copyleft { background: rgba(255, 59, 48, 0.16); color: #c2271e; }
   .lic.other         { background: rgba(142, 142, 147, 0.18); color: var(--text-secondary); }
-  .lic.none          { background: rgba(255, 59, 48, 0.10); color: var(--text-tertiary); border: 0.5px dashed rgba(255, 59, 48, 0.35); }
+  .lic.none          { background: rgba(255, 59, 48, 0.08); color: var(--text-tertiary); border: 0.5px dashed rgba(255, 59, 48, 0.30); }
   @media (prefers-color-scheme: dark) {
     .lic.permissive    { color: #6ce39a; }
     .lic.weak-copyleft { color: #ffb74d; }
     .lic.strong-copyleft { color: #ff7b73; }
   }
 
-  /* Category chip row on cards */
-  .repo-categories {
-    display: flex; align-items: center; gap: 4px;
-    overflow: hidden;
-    height: 18px;
-  }
-  .cat-chip {
-    display: inline-flex; align-items: center; gap: 4px;
-    padding: 1px 6px 1px 5px;
-    border-radius: 9px;
-    font-size: 10px; font-weight: 600;
-    background: color-mix(in srgb, var(--cat-color) 18%, transparent);
-    color: var(--cat-color);
-    flex-shrink: 0;
-    max-width: 110px;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .cat-chip::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--cat-color); flex-shrink: 0;
-  }
-  .cat-chip-more {
-    font-size: 10px; color: var(--text-tertiary); font-weight: 500;
+  /* Category dot pills — inline tiny indicators */
+  .repo-cat-dots {
+    display: inline-flex; align-items: center; gap: 2px;
     flex-shrink: 0;
   }
-  .cat-chip-empty {
-    font-size: 10.5px; color: var(--text-tertiary);
-    font-style: italic;
-    cursor: pointer;
+  .cat-dot-mini {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cat-color, #999);
+    box-shadow: 0 0 0 0.5px rgba(0,0,0,0.15);
+    flex-shrink: 0;
   }
-  .cat-chip-empty:hover { color: var(--accent); }
+  .repo-cat-dots .more {
+    font-size: 9px; color: var(--text-tertiary); font-weight: 600;
+    margin-left: 2px;
+  }
 
   .updated-row {
     display: flex; align-items: center; justify-content: space-between;
-    font-size: 10.5px; color: var(--text-tertiary);
+    font-size: 10px; color: var(--text-tertiary);
     font-variant-numeric: tabular-nums;
+    line-height: 1.3;
+    margin-top: auto;
   }
   .updated-pill {
     background: var(--accent-soft); color: var(--accent);
-    padding: 1px 6px; border-radius: 3px;
-    font-weight: 600; font-size: 9.5px;
+    padding: 0 5px; border-radius: 3px;
+    font-weight: 600; font-size: 9px;
+    line-height: 1.5;
   }
   .updated-pill.stale { background: rgba(142, 142, 147, 0.18); color: var(--text-secondary); }
   .updated-pill.fresh { background: rgba(48, 209, 88, 0.18); color: #1a7f3c; }
@@ -737,7 +726,7 @@
     .refresh-status { order: 4; flex-basis: 100%; justify-content: flex-end; padding-right: 4px; }
     .toolbar-spacer { display: none; }
     .grid { grid-template-columns: 1fr; gap: 8px; }
-    .repo-card { padding: 12px; height: 128px; }
+    .repo-card { padding: 9px 11px; height: 84px; }
     .repo-card:hover { transform: none; }
     .update-toast { left: 16px; right: 16px; transform: translate(0, 200%); }
     .update-toast.visible { transform: translate(0, 0); }
@@ -986,7 +975,7 @@
   const GITHUB_USER = 'SolarMason';
   const REFRESH_MS  = 5 * 60 * 1000;
   const PER_PAGE    = 100;
-  const CACHE_KEY   = 'solarmason-repo-cache-v6';
+  const CACHE_KEY   = 'solarmason-repo-cache-v7';
   const CHUNK_SIZE  = 50;
 
   const LANG_COLORS = {
@@ -1236,53 +1225,52 @@
     const iconBg = `linear-gradient(135deg, hsl(${hue} 80% 55%), hsl(${(hue+45)%360} 75% 60%))`;
 
     const badges = [];
-    if (r.archived)    badges.push('<span class="badge archived">A</span>');
-    if (r.fork)        badges.push('<span class="badge fork">F</span>');
-    if (r.private)     badges.push('<span class="badge private">P</span>');
-    if (r.is_template) badges.push('<span class="badge template">T</span>');
+    if (r.archived)    badges.push('<span class="badge archived" title="Archived">A</span>');
+    if (r.fork)        badges.push('<span class="badge fork" title="Fork">F</span>');
+    if (r.private)     badges.push('<span class="badge private" title="Private">P</span>');
+    if (r.is_template) badges.push('<span class="badge template" title="Template">T</span>');
 
     const lic = licenseInfo(r.license);
     const langPart = r.language
-      ? `<span class="meta meta-grow"><span class="lang-dot" style="background:${langColor}"></span>${escapeHtml(r.language)}</span>`
+      ? `<span class="meta meta-grow" title="${escapeHtml(r.language)}"><span class="lang-dot" style="background:${langColor}"></span>${escapeHtml(r.language)}</span>`
       : `<span class="meta meta-grow" style="color:var(--text-tertiary)">—</span>`;
 
-    // Categories
+    // Categories rendered as tiny color dots in the header (max 3 + count)
     const repoCats = categoriesStore.forRepo(r.name)
       .map(id => categoriesStore.byId(id)).filter(Boolean);
-    let catRow;
-    if (repoCats.length === 0) {
-      catRow = `<div class="repo-categories"><span class="cat-chip-empty" data-cat-empty="1">+ Add to category…</span></div>`;
-    } else {
-      const visibleCats = repoCats.slice(0, 3);
-      const more = repoCats.length - visibleCats.length;
-      const chips = visibleCats.map(c =>
-        `<span class="cat-chip" style="--cat-color:${c.color}" title="${escapeHtml(c.name)}">${escapeHtml(c.name)}</span>`
+    let catDots = '';
+    if (repoCats.length > 0) {
+      const visible = repoCats.slice(0, 3);
+      const more = repoCats.length - visible.length;
+      const dots = visible.map(c =>
+        `<span class="cat-dot-mini" style="--cat-color:${c.color}" title="${escapeHtml(c.name)}"></span>`
       ).join('');
-      catRow = `<div class="repo-categories">${chips}${more > 0 ? `<span class="cat-chip-more">+${more}</span>` : ''}</div>`;
+      catDots = `<span class="repo-cat-dots" title="${escapeHtml(repoCats.map(c=>c.name).join(', '))}">${dots}${more > 0 ? `<span class="more">+${more}</span>` : ''}</span>`;
     }
 
     const desc = r.description ? `${escapeHtml(r.description).replace(/"/g,'&quot;')}\n\n` : '';
+    const catTitle = repoCats.length > 0 ? `Categories: ${escapeHtml(repoCats.map(c => c.name).join(', '))}\n` : '';
 
     return `
-      <a class="repo-card" data-repo-name="${escapeHtml(r.name)}" href="${r.html_url}" target="_blank" rel="noopener noreferrer" title="${desc}License: ${escapeHtml(lic.label)}\nPushed: ${fmtDate(r.pushed_at)}">
+      <a class="repo-card" data-repo-name="${escapeHtml(r.name)}" href="${r.html_url}" target="_blank" rel="noopener noreferrer" title="${desc}${catTitle}License: ${escapeHtml(lic.label)}\nPushed: ${fmtDate(r.pushed_at)}">
         <div class="repo-card-header">
           <div class="repo-icon" style="background:${iconBg}">${escapeHtml(initials)}</div>
           <div class="repo-name">${escapeHtml(r.name)}</div>
+          ${catDots}
           <div class="repo-badges">${badges.join('')}</div>
-          <button class="card-menu-btn" data-menu-btn="1" aria-label="Card menu">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
+          <button class="card-menu-btn" data-menu-btn="1" aria-label="Categorize">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg>
           </button>
         </div>
         <div class="repo-meta">
           ${langPart}
           <span class="lic ${lic.class}" title="License: ${escapeHtml(lic.label)}">${escapeHtml(lic.short)}</span>
-          <span class="meta" title="Stars">★ ${r.stargazers_count}</span>
-          <span class="meta" title="Forks">⑂ ${r.forks_count}</span>
-          <span class="meta" title="Open issues">! ${r.open_issues_count}</span>
+          <span class="meta" title="Stars">★${r.stargazers_count}</span>
+          <span class="meta" title="Forks">⑂${r.forks_count}</span>
+          <span class="meta" title="Open issues">!${r.open_issues_count}</span>
         </div>
-        ${catRow}
         <div class="updated-row">
-          <span title="Last commit pushed: ${fmtDate(r.pushed_at)}">Pushed ${relativeTime(r.pushed_at)} ago</span>
+          <span title="Last commit pushed: ${fmtDate(r.pushed_at)}">Pushed ${relativeTime(r.pushed_at)}</span>
           <span class="updated-pill ${fresh}" title="Last metadata update: ${fmtDate(r.updated_at)}">${relativeTime(r.updated_at)}</span>
         </div>
       </a>
@@ -1750,15 +1738,6 @@
       e.stopPropagation();
       const card = menuBtn.closest('[data-repo-name]');
       if (card) openCatPopover(card.dataset.repoName, menuBtn);
-      return;
-    }
-    const emptyChip = e.target.closest('[data-cat-empty]');
-    if (emptyChip) {
-      e.preventDefault();
-      e.stopPropagation();
-      const card = emptyChip.closest('[data-repo-name]');
-      const menuBtnEl = card ? card.querySelector('[data-menu-btn]') : null;
-      if (card && menuBtnEl) openCatPopover(card.dataset.repoName, menuBtnEl);
       return;
     }
   });
